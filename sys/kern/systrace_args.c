@@ -3302,6 +3302,15 @@ systrace_args(int sysnum, void *params, uint64_t *uarg, int *n_args)
 		*n_args = 3;
 		break;
 	}
+	/* caesar_encrypt */
+	case 568: {
+		struct caesar_encrypt_args *p = params;
+		uarg[0] = p->shift; /* size_t * */
+		uarg[1] = (intptr_t) p->buf; /* char * */
+		uarg[2] = p->bufsize; /* size_t */
+		*n_args = 3;
+		break;
+	}
 	default:
 		*n_args = 0;
 		break;
@@ -8810,6 +8819,22 @@ systrace_entry_setargdesc(int sysnum, int ndx, char *desc, size_t descsz)
 			break;
 		};
 		break;
+	/* caesar_encrypt */
+	case 568:
+		switch(ndx) {
+		case 0:
+			p = "size_t";
+			break;
+		case 1:
+			p = "userland char *";
+			break;
+		case 2:
+			p = "size_t";
+			break;
+		default:
+			break;
+		};
+		break;
 	default:
 		break;
 	};
@@ -10703,6 +10728,11 @@ systrace_return_setargdesc(int sysnum, int ndx, char *desc, size_t descsz)
 		break;
 	/* fhreadlink */
 	case 567:
+		if (ndx == 0 || ndx == 1)
+			p = "int";
+		break;
+	/* caesar_encrypt */
+	case 568:
 		if (ndx == 0 || ndx == 1)
 			p = "int";
 		break;

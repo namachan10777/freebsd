@@ -1790,6 +1790,11 @@ struct fhreadlink_args {
 	char buf_l_[PADL_(char *)]; char * buf; char buf_r_[PADR_(char *)];
 	char bufsize_l_[PADL_(size_t)]; size_t bufsize; char bufsize_r_[PADR_(size_t)];
 };
+struct caesar_encrypt_args {
+	char shift_l_[PADL_(size_t)]; size_t shift; char shift_r_[PADR_(size_t)];
+	char buf_l_[PADL_(char *)]; char * buf; char buf_r_[PADR_(char *)];
+	char bufsize_l_[PADL_(size_t)]; size_t bufsize; char bufsize_r_[PADR_(size_t)];
+};
 int	nosys(struct thread *, struct nosys_args *);
 void	sys_sys_exit(struct thread *, struct sys_exit_args *);
 int	sys_fork(struct thread *, struct fork_args *);
@@ -2174,6 +2179,7 @@ int	sys_getfhat(struct thread *, struct getfhat_args *);
 int	sys_fhlink(struct thread *, struct fhlink_args *);
 int	sys_fhlinkat(struct thread *, struct fhlinkat_args *);
 int	sys_fhreadlink(struct thread *, struct fhreadlink_args *);
+int	sys_caesar_encrypt(struct thread *, struct caesar_encrypt_args *);
 
 #ifdef COMPAT_43
 
@@ -3075,6 +3081,7 @@ int	freebsd11_mknodat(struct thread *, struct freebsd11_mknodat_args *);
 #define	SYS_AUE_fhlink	AUE_NULL
 #define	SYS_AUE_fhlinkat	AUE_NULL
 #define	SYS_AUE_fhreadlink	AUE_NULL
+#define	SYS_AUE_caesar_encrypt	AUE_NULL
 
 #undef PAD_
 #undef PADL_

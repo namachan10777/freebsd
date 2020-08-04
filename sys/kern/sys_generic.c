@@ -181,6 +181,41 @@ iosize_max(void)
 #endif
 
 #ifndef _SYS_SYSPROTO_H_
+struct caesar_encrypt_args {
+        size_t shift;
+        char *buf;
+        size_t bufsize;
+};
+#endif
+int
+sys_caesar_encrypt(struct thread *td, struct caesar_encrypt_args *uap)
+{
+        printf("caesar encrypt\n");
+        int error = 0;
+        char* buf;
+        int i;
+        if (uap->bufsize > IOSIZE_MAX)
+                return (EINVAL);
+        buf = (char*)malloc(uap->bufsize, M_CAESAR_ENCRYPT, M_WAITOK);
+        error = copyin(uap->buf, buf, uap->bufsize);
+        if (error != 0)
+                return (error);
+        for (i = 0; i<uap->bufsize; ++i) {
+                char c = buf[i];
+                if (c >= 0x41 && c <= 0x5a) {
+                        buf[i] = ((c - 0x41 + uap->shift) % 27) + 0x41;
+                }
+                else if (c >= 0x61 && c <= 0x7a) {
+                        buf[i] = ((c - 0x61 + uap->shift) % 27) + 0x61;
+                }
+        }
+        error = copyout(buf, uap->buf, uap->bufsize);
+        if (error != 0)
+                return (error);
+        return 0;
+}
+
+#ifndef _SYS_SYSPROTO_H_
 struct read_args {
 	int	fd;
 	void	*buf;

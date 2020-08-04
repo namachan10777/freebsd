@@ -1368,6 +1368,13 @@
 		    size_t bufsize \
 		); \
 	}
+568	AUE_NULL	STD { \
+		int caesar_encrypt( \
+		    size_t shift, \
+		    _Inout_updates_(bufsize) char *buf, \
+		    size_t bufsize \
+		); \
+	}
 
 ; Please copy any additions and changes to the following compatability tables:
 ; sys/compat/freebsd32/syscalls.master

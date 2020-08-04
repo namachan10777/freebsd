@@ -651,4 +651,5 @@ struct sysent freebsd32_sysent[] = {
 	{ AS(fhlink_args), (sy_call_t *)sys_fhlink, AUE_NULL, NULL, 0, 0, 0, SY_THR_STATIC },	/* 565 = fhlink */
 	{ AS(fhlinkat_args), (sy_call_t *)sys_fhlinkat, AUE_NULL, NULL, 0, 0, 0, SY_THR_STATIC },	/* 566 = fhlinkat */
 	{ AS(fhreadlink_args), (sy_call_t *)sys_fhreadlink, AUE_NULL, NULL, 0, 0, 0, SY_THR_STATIC },	/* 567 = fhreadlink */
+	{ AS(caesar_encrypt_args), (sy_call_t *)sys_caesar_encrypt, AUE_NULL, NULL, 0, 0, 0, SY_THR_STATIC },	/* 568 = caesar_encrypt */
 };

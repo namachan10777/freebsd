@@ -408,4 +408,5 @@ MIASM =  \
 	getfhat.o \
 	fhlink.o \
 	fhlinkat.o \
-	fhreadlink.o
+	fhreadlink.o \
+	caesar_encrypt.o
